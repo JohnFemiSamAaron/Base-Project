@@ -3,14 +3,19 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Thirdweb;
+using System.Threading.Tasks;
 
 public class PowerUpSelector : MonoBehaviour
 {
+    [SerializeField] private ThirdwebManager _thirdwebManager;
     private List<string> _selectedPowerUps = new List<string>();
     private int maxSelection = 3;
 
     public List<Button> powerUpButtons;
     public TextMeshProUGUI feedbackText;
+
+    [SerializeField] private GameObject Confirmation;
 
     private Scene _currentScene;
 
@@ -80,5 +85,10 @@ public class PowerUpSelector : MonoBehaviour
                 SceneManager.LoadScene(nextSceneIndex, LoadSceneMode.Single);
             }
         }
+    }
+
+    public void CheckingSomething()
+    {
+        Confirmation.SetActive((true));
     }
 }
