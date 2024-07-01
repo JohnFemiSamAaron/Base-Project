@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         Bullet _bulletToFire = Instantiate(_bullet, _spawnPoint.position, Quaternion.identity);
         _bulletToFire.Shoot(_playerAiming.turn);
+        _bulletToFire.Owner = gameObject;
     }
 
     private void UseActivePowerUp()
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
             case PowerUpManager.Powerups.Turret:
                 TurretBullet _firedBullet = Instantiate(_turretBullet, _spawnPoint.position, Quaternion.identity);
                 _firedBullet.Shoot(_playerAiming.turn);
+                _firedBullet.Owner = gameObject;
                 break;
 
             case PowerUpManager.Powerups.Canon:
@@ -96,10 +98,35 @@ public class PlayerController : MonoBehaviour
 
         if (_projectile != null)
         {
-            float _damagePoints = _projectile.GetDamagePoints();
-            _playerHealth.TakeDamage(_damagePoints);
+            // Check if the projectile was fired by the player
+            if (_projectile.Owner != gameObject)
+            {
+                float _damagePoints = _projectile.GetDamagePoints();
+                _playerHealth.TakeDamage(_damagePoints);
+            }
+
+            Destroy(collision.gameObject); // Destroy the projectile after collision
+            return;
         }
+
+        // Hardcoding the damage points of turret, canon because of the deadline
+        switch (collision.gameObject.name)
+        {
+            case "Turret Bullet":
+                _playerHealth.TakeDamage(7);
+                break;
+
+            case "CannonBullet":
+                _playerHealth.TakeDamage(10);
+                break;
+
+            default:
+                break;
+        }
+
+        Destroy(collision.gameObject);
     }
+
 
     private void HandlePowerUpChanged(PowerUpManager.Powerups newPowerUp)
     {

@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     public int life = 3;
     public float speed = 30f;
     private Vector2 direction;
+    public GameObject Owner { get; set; }
 
     /// <summary>
     /// Projectile's speed.
