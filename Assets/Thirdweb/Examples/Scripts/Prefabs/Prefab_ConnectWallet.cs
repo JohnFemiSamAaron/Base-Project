@@ -9,7 +9,6 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Numerics;
 using RotaryHeart.Lib.SerializableDictionary;
-using UnityEditor;
 
 
 namespace Thirdweb.Examples
@@ -68,6 +67,11 @@ namespace Thirdweb.Examples
         private string _address;
         private string _password;
         private ChainData _currentChainData;
+
+        //[Header("Confirmation")] 
+        //[SerializeField] private PowerUpSelector _powerUpSelector;
+        
+
 
         private void Start()
         {

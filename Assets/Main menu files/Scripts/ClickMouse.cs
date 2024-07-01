@@ -78,8 +78,8 @@ public class ClickMouse : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         {
             case Buttons.Start:
                 // Debug.Log("I got started");
-                // Cursor.visible = false;
-                // Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
                 // TODO: Disable Mouse input.
                 if (timelineControllerScript != null) timelineControllerScript.Play();
                 StartCoroutine(eventHandlerScript.StartChangeScene(timelineControllerScript.PlayDuration()));
