@@ -19,6 +19,7 @@ namespace Thirdweb.Examples
             nftImage.sprite = await ThirdwebManager.Instance.SDK.Storage.DownloadImage(nft.metadata.image);
             nftButton.onClick.RemoveAllListeners();
             nftButton.onClick.AddListener(() => DoSomething(nft));
+            
         }
 
         void DoSomething(NFT nft)

@@ -5,10 +5,9 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Thirdweb;
 using System.Threading.Tasks;
-
+using Thirdweb.Examples;
 public class PowerUpSelector : MonoBehaviour
 {
-    [SerializeField] private ThirdwebManager _thirdwebManager;
     private List<string> _selectedPowerUps = new List<string>();
     private int maxSelection = 3;
 
@@ -18,6 +17,7 @@ public class PowerUpSelector : MonoBehaviour
     [SerializeField] private GameObject Confirmation;
 
     private Scene _currentScene;
+    
 
     void Start()
     {
@@ -91,4 +91,5 @@ public class PowerUpSelector : MonoBehaviour
     {
         Confirmation.SetActive((true));
     }
+    
 }
