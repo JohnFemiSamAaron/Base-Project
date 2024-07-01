@@ -15,6 +15,8 @@ public class NftManager : MonoBehaviour
     private NFT nft;
     private Contract contract;
     public Prefab_NFT prefab_NFT;
+
+    private String address;
     //public TMP_Text confirm;
 
     // Start is called before the first frame update
@@ -22,6 +24,7 @@ public class NftManager : MonoBehaviour
     {
         sdk = _thirdwebManager.SDK;
         contract = sdk.GetContract("0xFb1Eb0e44ae5298BE4e23C1ab7C807d6158B934C");
+        address = await _thirdwebManager.SDK.Wallet.GetAddress();
         //GetNFTMedia();
         Debug.Log("Started");
         //await(CheckBalance());
@@ -30,8 +33,8 @@ public class NftManager : MonoBehaviour
 
     public async Task<string> CheckBalance()
     {
-        contract = sdk.GetContract("0xFb1Eb0e44ae5298BE4e23C1ab7C807d6158B934C");
-        string balance = await contract.Read<string>("balanceof", "0x39691E1C32Ed33EBd775f51AA2568f1eD7eBCe7E", 0);
+        contract = sdk.GetContract("0xDE3727A531423ccF41cb5c1007172384a6736a74");
+        string balance = await contract.Read<string>("balanceof", "0xDE3727A531423ccF41cb5c1007172384a6736a74", 0);
         print (balance);
         return balance;
     }
@@ -44,5 +47,13 @@ public class NftManager : MonoBehaviour
         prefabNftScript.LoadNFT(nft);
         //confirm.text = nft.metadata.name;
         Debug.Log(nft.metadata.name);
+    }
+    
+    public async void claimNFT()
+    {
+        contract = sdk.GetContract("0xDE3727A531423ccF41cb5c1007172384a6736a74");
+        await contract.ERC1155.ClaimTo(address, "0", 1);
+        
+        //Give Ability to then highlight like the rest
     }
 }
