@@ -1,3 +1,4 @@
+using Org.BouncyCastle.Asn1.Esf;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -56,11 +57,9 @@ public class EnemyController : MonoBehaviour
                 break;
 
             case PowerUpManager.Powerups.Regen:
-                // Do nothing
                 break;
 
             case PowerUpManager.Powerups.Juggernaut:
-                // Do nothing
                 break;
 
             default:
@@ -77,6 +76,25 @@ public class EnemyController : MonoBehaviour
         {
             float _damagePoints = _projectile.GetDamagePoints();
             _enemyHealth.TakeDamage(_damagePoints);
+            Destroy(_projectile.gameObject);
+            return;
+        }
+
+        // basically hardcoding the damage points of turret, canon because of the deadline
+        switch (collision.gameObject.name)
+        {
+            case "Turret Bullet":
+                _enemyHealth.TakeDamage(7);
+                Destroy(collision.gameObject);
+                break;
+
+            case "CannonBullet":
+                _enemyHealth.TakeDamage(10);
+                Destroy(collision.gameObject);
+                break;
+
+            default:
+                break;
         }
     }
 

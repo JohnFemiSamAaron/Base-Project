@@ -5,8 +5,8 @@ public class TurretBullet : MonoBehaviour
     public Rigidbody2D rb;
     public int life = 3;
     public float speed = 30f;
-
     private Vector2 direction;
+    public GameObject Owner { get; set; }
     // Start is called before the first frame update
     void Start()
     {
